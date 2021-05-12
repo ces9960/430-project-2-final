@@ -30,4 +30,29 @@ const makeRule = (req,res) => {
     return rulePromise;
 }
 
-module.exports.make = makeRule;
+const rulePage = (req,res) => {
+    rule.ruleModel.findByOwner(req.session.account._id, (err,docs) => {
+        if(err){
+            console.log(err);
+            return res.status(400).json({error: 'An error occurred'})
+        }
+        return res.render('app',{rules:docs});
+    });
+};
+
+const getRules = (rerule,response) => {
+    const req = rerule;
+    const res = response;
+
+    return rule.ruleModel.findByOwner(req.session.account._id, (err,docs) => {
+        if(err){
+            console.log(err);
+            return res.status(400).json({error: 'An error occurred'});
+        }
+        return res.json({rules:docs});
+    });
+};
+
+module.exports.rulePage = rulePage;
+module.exports.getRules = getRules;
+module.exports.makeRule = makeRule;

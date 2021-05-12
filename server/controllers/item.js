@@ -32,4 +32,29 @@ const makeItem = (req,res) => {
     return itemPromise;
 }
 
-module.exports.make = makeItem;
+const itemPage = (req,res) => {
+    item.itemModel.findByOwner(req.session.account._id, (err,docs) => {
+        if(err){
+            console.log(err);
+            return res.status(400).json({error: 'An error occurred'})
+        }
+        return res.render('app',{items:docs});
+    });
+};
+
+const getItems = (request,response) => {
+    const req = request;
+    const res = response;
+
+    return item.itemModel.findByOwner(req.session.account._id, (err,docs) => {
+        if(err){
+            console.log(err);
+            return res.status(400).json({error: 'An error occurred'});
+        }
+        return res.json({items:docs});
+    });
+};
+
+module.exports.itemPage = itemPage;
+module.exports.getItems = getItems;
+module.exports.makeItem = makeItem;

@@ -7,9 +7,9 @@ const makeQuest = (req,res) => {
 
     const questData = {
         name: req.body.name,
-        questType: req.body.questType,
-        description: req.body.description,
-        location: req.body.location,
+        questGiver: req.body.questGiver,
+        objective: req.body.objective,
+        reward: req.body.reward,
         owner: req.session.account._id
     };
 
@@ -22,7 +22,7 @@ const makeQuest = (req,res) => {
     questPromise.catch((err) => {
         console.log(err);
         if(error.code === 11000){
-            return res.status(400).json({error: 'quest already exists'});
+            return res.status(400).json({error: 'Quest already exists'});
         }
 
         return res.status(400).json({error: 'An error occurred'});
@@ -31,4 +31,29 @@ const makeQuest = (req,res) => {
     return questPromise;
 }
 
-module.exports.make = makeQuest;
+const questPage = (req,res) => {
+    quest.questModel.findByOwner(req.session.account._id, (err,docs) => {
+        if(err){
+            console.log(err);
+            return res.status(400).json({error: 'An error occurred'})
+        }
+        return res.render('app',{quests:docs});
+    });
+};
+
+const getQuests = (request,response) => {
+    const req = request;
+    const res = response;
+
+    return quest.questModel.findByOwner(req.session.account._id, (err,docs) => {
+        if(err){
+            console.log(err);
+            return res.status(400).json({error: 'An error occurred'});
+        }
+        return res.json({quests:docs});
+    });
+};
+
+module.exports.questPage = questPage;
+module.exports.getQuests = getQuests;
+module.exports.makeQuest = makeQuest;

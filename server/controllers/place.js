@@ -32,4 +32,30 @@ const makePlace = (req,res) => {
     return placePromise;
 }
 
-module.exports.make = makePlace;
+const placePage = (req,res) => {
+    place.placeModel.findByOwner(req.session.account._id, (err,docs) => {
+        if(err){
+            console.log(err);
+            return res.status(400).json({error: 'An error occurred'})
+        }
+        return res.render('app',{places:docs});
+    });
+};
+
+const getPlaces = (request,response) => {
+    const req = request;
+    const res = response;
+
+    return place.placeModel.findByOwner(req.session.account._id, (err,docs) => {
+        if(err){
+            console.log(err);
+            return res.status(400).json({error: 'An error occurred'});
+        }
+
+        return res.json({places: docs});
+    });
+};
+
+module.exports.placePage = placePage;
+module.exports.getPlaces = getPlaces;
+module.exports.makePlace = makePlace;

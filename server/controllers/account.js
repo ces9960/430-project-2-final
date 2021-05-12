@@ -72,6 +72,16 @@ const signup = (request,response) => {
     });
 }
 
+const loginPage = (req,res) => {
+    res.render('login');
+}
+
+const signupPage = (req,res) => {
+    res.render('signup');
+}
+
 module.exports.login = login;
+module.exports.loginPage = loginPage;
 module.exports.logout = logout;
 module.exports.signup = signup;
+module.exports.signupPage = signupPage;

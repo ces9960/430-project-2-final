@@ -34,4 +34,29 @@ const makeNpc = (req,res) => {
     return npcPromise;
 }
 
-module.exports.make = makeNpc;
+const npcPage = (req,res) => {
+    npc.npcModel.findByOwner(req.session.account._id, (err,docs) => {
+        if(err){
+            console.log(err);
+            return res.status(400).json({error: 'An error occurred'})
+        }
+        return res.render('app',{npcs:docs});
+    });
+};
+
+const getNpcs = (request,response) => {
+    const req = request;
+    const res = response;
+
+    return npc.npcModel.findByOwner(req.session.account._id, (err,docs) => {
+        if(err){
+            console.log(err);
+            return res.status(400).json({error: 'An error occurred'});
+        }
+        return res.json({npcs:docs});
+    });
+};
+
+module.exports.npcPage = npcPage;
+module.exports.getNpcs = getNpcs;
+module.exports.makeNpc = makeNpc;
