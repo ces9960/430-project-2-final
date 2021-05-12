@@ -1,4 +1,3 @@
-import { rule } from '../../server/controllers';
 import './App.css';
 
 const handleError = (message) => {
