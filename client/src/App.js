@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom';
 import xhr from 'xmlhttprequest';
 import './App.css';
 
+//error handling function
 const handleError = (message) => {
   document.querySelector("#errorMessage").innerHTML = message;
 }
 
+//redirect function
 const redirect = (response) => {
   window.location = response.redirect;
 }
 
+//function to send ajax requests
 const sendAjax = (type,action,data,success) => {
   document.querySelector.ajax({
     cache:false,
@@ -26,6 +29,7 @@ const sendAjax = (type,action,data,success) => {
   })
 }
 
+//form for making things
 const makerPage = () => {
   return(
     <div id="maker">
@@ -35,6 +39,7 @@ const makerPage = () => {
   );
 }
 
+//handles item submissions
 const handleItem = (e) => {
   e.preventDefault();
 
@@ -50,6 +55,7 @@ const handleItem = (e) => {
   return false;
 };
 
+//form for creating items
 const itemForm = () => {
   return(
     <form id="itemForm"
@@ -74,6 +80,7 @@ const itemForm = () => {
   );
 };
 
+//lists items
 const itemList = function(props){
   if(props.items.length === 0){
     return(
@@ -102,6 +109,7 @@ const itemList = function(props){
   );
 };
 
+//loads items from the server
 const loadItemsFromServer = () => {
   sendAjax('GET', '/getItems', null, (data) => {
     ReactDOM.render(
@@ -110,6 +118,7 @@ const loadItemsFromServer = () => {
   });
 };
 
+//page for creating items
 const createItemPage = () => {
   ReactDOM.render(makerPage(), "#content");
 
@@ -124,6 +133,7 @@ const createItemPage = () => {
   loadItemsFromServer();
 };
 
+//handles NPC submissions
 const handleNpc = (e) => {
   e.preventDefault();
 
@@ -139,6 +149,7 @@ const handleNpc = (e) => {
   return false;
 };
 
+//list of NPCs
 const npcList = function(props){
   if(props.npcs.length === 0){
     return(
@@ -169,6 +180,7 @@ const npcList = function(props){
   );
 };
 
+//loads NPCs
 const loadNpcsFromServer = () => {
   sendAjax('GET', '/getNpcs', null, (data) => {
     ReactDOM.render(
@@ -177,6 +189,7 @@ const loadNpcsFromServer = () => {
   });
 };
 
+//form for submitting NPCs
 const npcForm = () => {
   return(
     <form id="npcForm"
@@ -205,6 +218,7 @@ const npcForm = () => {
   );
 };
 
+//creates page for submitting NPCs
 const createNpcPage = () => {
   ReactDOM.render(makerPage(), "#content");
 
@@ -219,6 +233,7 @@ const createNpcPage = () => {
   loadNpcsFromServer();
 };
 
+//handles place submissions
 const handlePlace = (e) => {
   e.preventDefault();
 
@@ -234,6 +249,7 @@ const handlePlace = (e) => {
   return false;
 };
 
+//list of places
 const placeList = function(props){
   if(props.places.length === 0){
     return(
@@ -262,6 +278,7 @@ const placeList = function(props){
   );
 };
 
+//loads places from server
 const loadPlacesFromServer = () => {
   sendAjax('GET', '/getPlaces', null, (data) => {
     ReactDOM.render(
@@ -270,6 +287,7 @@ const loadPlacesFromServer = () => {
   });
 };
 
+//form for creating places
 const placeForm = () => {
   return(
     <form id="placeForm"
@@ -294,6 +312,7 @@ const placeForm = () => {
   );
 };
 
+//displays a page for creating quests
 const createPlacePage = () => {
   ReactDOM.render(makerPage(), "#content");
 
@@ -308,6 +327,7 @@ const createPlacePage = () => {
   loadPlacesFromServer();
 };
 
+//handles creating quests
 const handleQuest = (e) => {
   e.preventDefault();
 
@@ -323,6 +343,7 @@ const handleQuest = (e) => {
   return false;
 };
 
+//list of quests
 const questList = function(props){
   if(props.quests.length === 0){
     return(
@@ -350,6 +371,7 @@ const questList = function(props){
   );
 };
 
+//loads quests from server
 const loadQuestsFromServer = () => {
   sendAjax('GET', '/getQuests', null, (data) => {
     ReactDOM.render(
@@ -358,6 +380,7 @@ const loadQuestsFromServer = () => {
   });
 };
 
+//form for creating quests
 const questForm = () => {
   return(
     <form id="questForm"
@@ -380,6 +403,7 @@ const questForm = () => {
   );
 };
 
+//handles creation of quests
 const createQuestPage = () => {
   ReactDOM.render(makerPage(), "#content");
 
@@ -394,6 +418,7 @@ const createQuestPage = () => {
   loadQuestsFromServer();
 };
 
+//handles creation of rules
 const handleRule = (e) => {
   e.preventDefault();
 
@@ -435,6 +460,7 @@ const ruleList = function(props){
   );
 };
 
+//loads rules from server
 const loadRulesFromServer = () => {
   sendAjax('GET', '/getRules', null, (data) => {
     ReactDOM.render(
@@ -443,6 +469,7 @@ const loadRulesFromServer = () => {
   });
 };
 
+//a form for creating custom rules
 const ruleForm = () => {
   return(
     <form id="ruleForm"
@@ -463,6 +490,7 @@ const ruleForm = () => {
   );
 };
 
+//creates a page for displaying custom rules
 const createRulePage = () => {
   ReactDOM.render(makerPage(), "#content");
 
@@ -477,6 +505,7 @@ const createRulePage = () => {
   loadRulesFromServer();
 };
 
+//sends Ajax requests to login
 const handleLogin = (e) => {
   e.preventDefault();
 
@@ -489,6 +518,7 @@ const handleLogin = (e) => {
   return false;
 }
 
+//form for logging in
 const LoginWindow = () => {
   return(
     <form id="loginForm"
@@ -506,6 +536,7 @@ const LoginWindow = () => {
   )
 }
 
+//displays the login window
 const createLoginWindow = () => {
   ReactDOM.render(
     <LoginWindow/>,
@@ -513,7 +544,7 @@ const createLoginWindow = () => {
   );
 };
 
-
+//sends Ajax requests to the server
 const handleSignup = (e) => {
   e.preventDefault();
 
@@ -526,6 +557,7 @@ const handleSignup = (e) => {
   return false;
 }
 
+//form for users to create accounts
 const SignupWindow = () => {
   return(
     <form id="signupForm"
@@ -545,6 +577,7 @@ const SignupWindow = () => {
   )
 }
 
+//displays the signup window
 const createSignupWindow = () => {
   ReactDOM.render(
     <SignupWindow/>,
@@ -552,6 +585,7 @@ const createSignupWindow = () => {
   );
 };
 
+//sets up buttons and displays the login screen
 const setup = () => {
   const loginButton = document.querySelector("#loginButton");
   const signupButton = document.querySelector("#signupButton");
@@ -614,10 +648,12 @@ const setup = () => {
 
 }
 
+//sets everything up when the page loads
 document.querySelector(document).ready(function(){
   setup();
 })
 
+//the actual React app
 function App() {
   return (
     <div className="App">
@@ -636,7 +672,7 @@ function App() {
 
       </div>
       <div id="errorMessage">
-        
+
       </div>
     </div>
   );
