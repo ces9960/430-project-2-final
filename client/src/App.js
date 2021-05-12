@@ -635,6 +635,9 @@ function App() {
       <div id="content">
 
       </div>
+      <div id="errorMessage">
+        
+      </div>
     </div>
   );
 }
