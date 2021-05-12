@@ -619,6 +619,7 @@ $(document).ready(function(){
 function App() {
   return (
     <div className="App">
+      <h1>Tabletop RPG Organizer</h1>
       <div id="nav">
         <button id="loginButton">Login</button>
         <button id="signupButton">Sign Up</button>
