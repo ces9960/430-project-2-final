@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import xhr from 'xmlhttprequest';
 import './App.css';
 
 const handleError = (message) => {
-  $("#errorMessage").text(message);
+  document.querySelector("#errorMessage").innerHTML = message;
 }
 
 const redirect = (response) => {
   window.location = response.redirect;
 }
 
-const sendAjax = (type,action,data,sucess) => {
-  $.ajax({
+const sendAjax = (type,action,data,success) => {
+  document.querySelector.ajax({
     cache:false,
     type:type,
     url:action,
@@ -37,12 +38,12 @@ const makerPage = () => {
 const handleItem = (e) => {
   e.preventDefault();
 
-  if($("#itemName").val() == '' || $("#itemPrice").val() == '' || $("#itemType").val() == '' || $("#itemDescription").val() == '' || $("#itemLocation").val() == ''){
+  if(document.querySelector("#itemName").val() == '' || document.querySelector("#itemPrice").val() == '' || document.querySelector("#itemType").val() == '' || document.querySelector("#itemDescription").val() == '' || document.querySelector("#itemLocation").val() == ''){
     handleError("All fields are required");
     return false;
   }
 
-  sendAjax('POST', $("#itemForm").attr("action"), $("#itemForm").serialize(), function(){
+  sendAjax('POST', document.querySelector("#itemForm").attr("action"), document.querySelector("#itemForm").serialize(), function(){
     loadItemsFromServer();
   });
 
@@ -126,12 +127,12 @@ const createItemPage = () => {
 const handleNpc = (e) => {
   e.preventDefault();
 
-  if($("#npcName").val() == '' || $("#npcAge").val() == '' || $("#npcAlignment").val() == '' || $("#npcAppearance").val() == '' || $("#npcPersonality").val() == '' || $("#npcBackstory").val() == '' || $("#npcLocation").val() == ''){
+  if(document.querySelector("#npcName").val() == '' || document.querySelector("#npcAge").val() == '' || document.querySelector("#npcAlignment").val() == '' || document.querySelector("#npcAppearance").val() == '' || document.querySelector("#npcPersonality").val() == '' || document.querySelector("#npcBackstory").val() == '' || document.querySelector("#npcLocation").val() == ''){
     handleError("All fields are required");
     return false;
   }
 
-  sendAjax('POST', $("#npcForm").attr("action"), $("#npcForm").serialize(), function(){
+  sendAjax('POST', document.querySelector("#npcForm").attr("action"), document.querySelector("#npcForm").serialize(), function(){
     loadNpcsFromServer();
   });
 
@@ -221,12 +222,12 @@ const createNpcPage = () => {
 const handlePlace = (e) => {
   e.preventDefault();
 
-  if($("#placeName").val() == '' || $("#placePopulation").val() == '' || $("#placeType").val() == '' || $("#placeClimate").val() == '' || $("#placeDescription").val() == ''){
+  if(document.querySelector("#placeName").val() == '' || document.querySelector("#placePopulation").val() == '' || document.querySelector("#placeType").val() == '' || document.querySelector("#placeClimate").val() == '' || document.querySelector("#placeDescription").val() == ''){
     handleError("All fields are required");
     return false;
   }
 
-  sendAjax('POST', $("#placeForm").attr("action"), $("#placeForm").serialize(), function(){
+  sendAjax('POST', document.querySelector("#placeForm").attr("action"), document.querySelector("#placeForm").serialize(), function(){
     loadPlacesFromServer();
   });
 
@@ -310,12 +311,12 @@ const createPlacePage = () => {
 const handleQuest = (e) => {
   e.preventDefault();
 
-  if($("#questName").val() == '' ||  $("#questType").val() == '' || $("#questGiver").val() == '' || $("#questReward").val() == ''){
+  if(document.querySelector("#questName").val() == '' ||  document.querySelector("#questType").val() == '' || document.querySelector("#questGiver").val() == '' || document.querySelector("#questReward").val() == ''){
     handleError("All fields are required");
     return false;
   }
 
-  sendAjax('POST', $("#questForm").attr("action"), $("#questForm").serialize(), function(){
+  sendAjax('POST', document.querySelector("#questForm").attr("action"), document.querySelector("#questForm").serialize(), function(){
     loadQuestsFromServer();
   });
 
@@ -396,12 +397,12 @@ const createQuestPage = () => {
 const handleRule = (e) => {
   e.preventDefault();
 
-  if($("#ruleName").val() == '' ||  $("#ruleOldText").val() == '' || $("#ruleNewText").val() == ''){
+  if(document.querySelector("#ruleName").val() == '' ||  document.querySelector("#ruleOldText").val() == '' || document.querySelector("#ruleNewText").val() == ''){
     handleError("All fields are required");
     return false;
   }
 
-  sendAjax('POST', $("#ruleForm").attr("action"), $("#ruleForm").serialize(), function(){
+  sendAjax('POST', document.querySelector("#ruleForm").attr("action"), document.querySelector("#ruleForm").serialize(), function(){
     loadRulesFromServer();
   });
 
@@ -479,12 +480,12 @@ const createRulePage = () => {
 const handleLogin = (e) => {
   e.preventDefault();
 
-  if($("#user").val() == '' || $("#pass").val() == ''){
+  if(document.querySelector("#user").val() == '' || document.querySelector("#pass").val() == ''){
     handleError("Username and/or password is missing");
     return false;
   }
 
-  sendAjax('POST',$("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
+  sendAjax('POST',document.querySelector("#loginForm").attr("action"), document.querySelector("#loginForm").serialize(), redirect);
   return false;
 }
 
@@ -516,12 +517,12 @@ const createLoginWindow = () => {
 const handleSignup = (e) => {
   e.preventDefault();
 
-  if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == ''){
+  if(document.querySelector("#user").val() == '' || document.querySelector("#pass").val() == '' || document.querySelector("#pass2").val() == ''){
     handleError("All fields are required");
     return false;
   }
 
-  sendAjax('POST',$("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
+  sendAjax('POST',document.querySelector("#signupForm").attr("action"), document.querySelector("#signupForm").serialize(), redirect);
   return false;
 }
 
@@ -613,7 +614,7 @@ const setup = () => {
 
 }
 
-$(document).ready(function(){
+document.querySelector(document).ready(function(){
   setup();
 })
 
